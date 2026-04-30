@@ -15,7 +15,7 @@ router.get('/:student_id', async (req, res) => {
           a.title AS assignment_title, 
           s.submitted_at,
           COALESCE(MAX(pr.similarity_pct), 0) AS highest_similarity,
-          COALESCE(MAX(pr.common_tokens), 0) AS max_similar_words,
+          COALESCE(MAX(pr.common_token_count), 0) AS max_similar_words,
           CASE 
               WHEN SUM(CASE WHEN pr.is_flagged = 'Y' THEN 1 ELSE 0 END) > 0 THEN 'FLAGGED'
               ELSE 'SAFE'
