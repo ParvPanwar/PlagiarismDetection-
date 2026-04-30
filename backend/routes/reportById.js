@@ -8,8 +8,8 @@ router.get('/:submission_id', async (req, res) => {
     const submissionId = req.params.submission_id;
 
     const [rows] = await db.query(
-      'SELECT * FROM V_PLAGIARISM_REPORT WHERE submission1_id = ?', 
-      [submissionId]
+      'SELECT * FROM V_PLAGIARISM_REPORT WHERE submission1_id = ? OR submission2_id = ?', 
+      [submissionId, submissionId]
     );
 
     res.json(rows); // Returns JSON array

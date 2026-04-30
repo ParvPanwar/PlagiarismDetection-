@@ -385,7 +385,7 @@ function StudentDashboard() {
                                 <td>{row.student2_roll}</td>
                                 <td>{row.common_token_count}</td>
                                 <td>
-                                  <span style={{ fontWeight: 600, display: 'inline-block', width: '40px' }}>{sim}%</span>
+                                  <span style={{ fontWeight: 600, display: 'inline-block', minWidth: '65px' }}>{sim}%</span>
                                   <div className={styles.miniProgress}>
                                     <div className={styles.miniProgressFill} style={{ width: `${sim}%`, backgroundColor: barColor }}></div>
                                   </div>

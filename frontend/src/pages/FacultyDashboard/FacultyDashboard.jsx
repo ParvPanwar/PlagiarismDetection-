@@ -158,7 +158,7 @@ function FacultyDashboard() {
                             </div>
                           </td>
                           <td>
-                            <span style={{ fontWeight: 600, display: 'inline-block', width: '40px' }}>{sim}%</span>
+                            <span style={{ fontWeight: 600, display: 'inline-block', minWidth: '65px' }}>{sim}%</span>
                             <div className={styles.miniProgress}>
                               <div className={styles.miniProgressFill} style={{ width: `${sim}%`, backgroundColor: barColor }}></div>
                             </div>
