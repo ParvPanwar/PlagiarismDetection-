@@ -206,7 +206,7 @@ function StudentDashboard() {
                           <td>#{sub.assignment_id}</td>
                           <td>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <span style={{ width: '45px', fontWeight: 600 }}>{sim.toFixed(2)}%</span>
+                              <span style={{ minWidth: '65px', fontWeight: 600 }}>{sim.toFixed(2)}%</span>
                               <div style={{ height: '6px', width: '60px', backgroundColor: 'var(--color-bg-sidebar)', borderRadius: '3px', overflow: 'hidden' }}>
                                 <div style={{ height: '100%', width: `${Math.min(sim, 100)}%`, backgroundColor: barColor, borderRadius: '3px' }} />
                               </div>

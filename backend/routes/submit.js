@@ -42,6 +42,13 @@ router.post('/', upload.single('file'), async (req, res) => {
     // Get a dedicated connection from the pool for the transaction
     const connection = await db.getConnection();
     try {
+      // Check submission limit (MAX 5)
+      const [countResult] = await connection.query('SELECT COUNT(*) as count FROM Submission WHERE student_id = ? AND assignment_id = ?', [student_id, assignment_id]);
+      if (countResult[0].count >= 5) {
+        connection.release();
+        return res.status(400).json({ error: 'You have reached the maximum limit of 5 submissions for this assignment.' });
+      }
+
       await connection.beginTransaction();
 
       // Call sp_add_submission which should set @id
