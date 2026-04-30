@@ -1,0 +1,219 @@
+.pageHeader {
+  padding: 2rem 2.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background-color: white;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.pageSubtitle {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.contentArea {
+  padding: 2rem 2.5rem;
+  margin: 0 auto;
+}
+
+/* Stats Row */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.statCardRed {
+  background-color: var(--color-flagged-bg);
+  border-color: var(--color-flagged-border);
+}
+
+.statCardGreen {
+  background-color: var(--color-safe-bg);
+  border-color: var(--color-safe-border);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.statCardRed .statLabel {
+  color: var(--color-flagged-text);
+}
+
+.statCardGreen .statLabel {
+  color: var(--color-safe-text);
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1;
+}
+
+.statCardRed .statValue {
+  color: var(--color-flagged-text);
+}
+
+.statCardGreen .statValue {
+  color: var(--color-safe-text);
+}
+
+/* Table Controls */
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.searchInput {
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  width: 300px;
+  font-family: inherit;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Table */
+.card {
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th, .table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table th {
+  background-color: #f8fafc;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.rowFlagged {
+  background-color: rgba(254, 242, 242, 0.5);
+}
+
+.rowSafe {
+  background-color: rgba(240, 253, 244, 0.5);
+}
+
+.studentInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.studentName {
+  font-weight: 600;
+}
+
+.studentRoll {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.miniProgress {
+  width: 80px;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+
+.miniProgressFill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.statusFlagged {
+  background-color: var(--color-flagged-border);
+  color: var(--color-flagged-text);
+}
+
+.statusSafe {
+  background-color: var(--color-safe-border);
+  color: var(--color-safe-text);
+}
+
+.emptyState {
+  padding: 4rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  color: var(--color-primary);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
