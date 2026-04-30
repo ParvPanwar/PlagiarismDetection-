@@ -6,6 +6,7 @@ const submitRoute = require('./routes/submit');
 const reportsRoute = require('./routes/reports');
 const submissionsRoute = require('./routes/submissions');
 const reportByIdRoute = require('./routes/reportById');
+const assignmentsRoute = require('./routes/assignments');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -20,6 +21,7 @@ app.use('/api/submit', submitRoute);
 app.use('/api/reports', reportsRoute);
 app.use('/api/submissions', submissionsRoute);
 app.use('/api/report', reportByIdRoute);
+app.use('/api/assignments', assignmentsRoute);
 
 // Basic health check
 app.get('/', (req, res) => {

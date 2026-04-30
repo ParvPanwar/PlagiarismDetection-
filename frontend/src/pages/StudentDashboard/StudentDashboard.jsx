@@ -16,6 +16,9 @@ function StudentDashboard() {
   const [submissions, setSubmissions] = useState([]);
   const [activeSubmissionId, setActiveSubmissionId] = useState(null);
 
+  // Assignments State
+  const [availableAssignments, setAvailableAssignments] = useState([]);
+
   // Form State
   const [studentId, setStudentId] = useState('');
   const [assignmentId, setAssignmentId] = useState('');
@@ -46,6 +49,19 @@ function StudentDashboard() {
       toast.error('Failed to load submission history');
     }
   };
+
+  // Fetch available assignments
+  useEffect(() => {
+    const fetchAssignments = async () => {
+      try {
+        const res = await axios.get(`${API_BASE}/assignments`);
+        setAvailableAssignments(res.data);
+      } catch (err) {
+        console.error('Failed to fetch assignments', err);
+      }
+    };
+    fetchAssignments();
+  }, []);
 
   // Pre-fill student ID from local storage or previous entry if we want, 
   // but for now we rely on the form input to trigger history load if they blur.
@@ -254,14 +270,20 @@ function StudentDashboard() {
                     </div>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>Assignment ID</label>
-                      <input 
-                        type="number" 
+                      <select 
                         className={styles.input}
                         value={assignmentId}
                         onChange={(e) => setAssignmentId(e.target.value)}
-                        placeholder="e.g., 1"
                         required
-                      />
+                        style={{ cursor: 'pointer', appearance: 'auto' }}
+                      >
+                        <option value="" disabled>Select an assignment...</option>
+                        {availableAssignments.map((a) => (
+                          <option key={a.assignment_id} value={a.assignment_id}>
+                            {a.title} (ID: {a.assignment_id})
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
