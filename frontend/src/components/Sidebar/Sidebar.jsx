@@ -8,7 +8,8 @@ const Sidebar = ({
   items, 
   activeItemId, 
   onItemClick, 
-  onNewSubmissionClick 
+  onNewSubmissionClick,
+  onViewAllReportsClick
 }) => {
   const navigate = useNavigate();
 
@@ -61,9 +62,14 @@ const Sidebar = ({
 
       <div className={styles.bottomAction}>
         {role === 'Student' && (
-          <button className={styles.btnNew} onClick={onNewSubmissionClick}>
-            <FiPlus /> New Submission
-          </button>
+          <>
+            <button className={styles.btnNew} style={{ marginBottom: '10px', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text)' }} onClick={onViewAllReportsClick}>
+              <FiShield style={{ marginRight: '8px' }} /> All Reports
+            </button>
+            <button className={styles.btnNew} onClick={onNewSubmissionClick}>
+              <FiPlus /> New Submission
+            </button>
+          </>
         )}
         <button className={styles.btnLogout} onClick={handleLogout}>
           <FiLogOut /> Sign Out

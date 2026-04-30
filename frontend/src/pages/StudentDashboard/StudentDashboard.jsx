@@ -10,7 +10,7 @@ import styles from './StudentDashboard.module.css';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
 function StudentDashboard() {
-  const [view, setView] = useState('SUBMIT'); // 'SUBMIT' | 'REPORT'
+  const [view, setView] = useState('SUBMIT'); // 'SUBMIT' | 'REPORT' | 'ALL_REPORTS'
   
   // Sidebar State
   const [submissions, setSubmissions] = useState([]);
@@ -37,6 +37,7 @@ function StudentDashboard() {
         date: sub.submitted_at,
         status: sub.status,
         similarity: sub.highest_similarity,
+        similar_words: sub.max_similar_words,
         assignment_id: sub.assignment_id
       }));
       setSubmissions(formatted);
@@ -139,6 +140,12 @@ function StudentDashboard() {
     setCurrentReport(null);
   };
 
+  const handleViewAllReports = () => {
+    setView('ALL_REPORTS');
+    setActiveSubmissionId('all');
+    setCurrentReport(null);
+  };
+
   return (
     <div className="layout-container">
       <Sidebar 
@@ -147,9 +154,81 @@ function StudentDashboard() {
         activeItemId={activeSubmissionId}
         onItemClick={loadReport}
         onNewSubmissionClick={handleNewSubmission}
+        onViewAllReportsClick={handleViewAllReports}
       />
 
       <main className="main-content">
+        {view === 'ALL_REPORTS' && (
+          <div className={styles.reportContainer} style={{ animation: 'slideIn 0.3s ease-out' }}>
+            <div className={styles.reportHeader}>
+              <h2 className={styles.reportTitle}>All Submitted Reports</h2>
+              <p className={styles.reportSubtitle}>A comprehensive overview of your submissions and their plagiarism status.</p>
+            </div>
+
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>File Name</th>
+                    <th>Assignment ID</th>
+                    <th>Similarity</th>
+                    <th>Similar Words</th>
+                    <th>Status</th>
+                    <th>Date Submitted</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {submissions.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-text-muted)' }}>
+                        No submissions found.
+                      </td>
+                    </tr>
+                  ) : (
+                    submissions.map((sub) => {
+                      const isFlagged = sub.status === 'FLAGGED';
+                      const sim = parseFloat(sub.similarity);
+                      
+                      let barColor = '#22c55e';
+                      if (sim >= 70) barColor = '#ef4444';
+                      else if (sim >= 40) barColor = '#f59e0b';
+
+                      return (
+                        <tr 
+                          key={sub.id} 
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => loadReport(sub)}
+                        >
+                          <td style={{ fontWeight: 500, color: 'var(--color-text)' }}>
+                            <FiFileText style={{ marginRight: '8px', color: 'var(--color-text-muted)' }}/>
+                            {sub.title}
+                          </td>
+                          <td>#{sub.assignment_id}</td>
+                          <td>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <span style={{ width: '45px', fontWeight: 600 }}>{sim.toFixed(2)}%</span>
+                              <div style={{ height: '6px', width: '60px', backgroundColor: 'var(--color-bg-sidebar)', borderRadius: '3px', overflow: 'hidden' }}>
+                                <div style={{ height: '100%', width: `${Math.min(sim, 100)}%`, backgroundColor: barColor, borderRadius: '3px' }} />
+                              </div>
+                            </div>
+                          </td>
+                          <td>{sub.similar_words} words</td>
+                          <td>
+                            <span className={`${styles.badge} ${isFlagged ? styles.badgeFlagged : styles.badgeSafe}`}>
+                              {sub.status}
+                            </span>
+                          </td>
+                          <td>{new Date(sub.date).toLocaleDateString()} {new Date(sub.date).toLocaleTimeString()}</td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
         {view === 'SUBMIT' && (
           <>
             <div className={styles.pageHeader}>
