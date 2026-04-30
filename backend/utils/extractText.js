@@ -24,7 +24,8 @@ async function extractText(buffer, mimetype) {
       const result = await mammoth.extractRawText({ buffer: buffer });
       return result.value;
     } else {
-      throw new Error('Unsupported file type for extraction');
+      // If multer let it through and it's not PDF or DOCX, it's a Python script
+      return buffer.toString('utf-8');
     }
   } catch (error) {
     throw new Error('Failed to extract text from file');
