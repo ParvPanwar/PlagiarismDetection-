@@ -10,11 +10,13 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
-    // Only allow PDF and DOCX files
+    // Only allow PDF, DOCX, and PY files
     if (
       file.mimetype === 'application/pdf' ||
       file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
-      file.mimetype === 'application/msword'
+      file.mimetype === 'application/msword' ||
+      file.mimetype === 'text/x-python' ||
+      file.originalname.endsWith('.py')
     ) {
       cb(null, true);
     } else {

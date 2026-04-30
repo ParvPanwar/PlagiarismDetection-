@@ -69,7 +69,8 @@ function StudentDashboard() {
     onDrop,
     accept: {
       'application/pdf': ['.pdf'],
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx']
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+      'text/x-python': ['.py']
     },
     maxFiles: 1
   });
@@ -202,7 +203,7 @@ function StudentDashboard() {
                       <>
                         <FiUploadCloud className={styles.dropzoneIcon} />
                         <div className={styles.dropzoneText}>
-                          Drag & drop your PDF or DOCX here
+                          Drag & drop your PDF, DOCX, or PY here
                         </div>
                         <div className={styles.dropzoneSubtext}>
                           or click to browse from your computer

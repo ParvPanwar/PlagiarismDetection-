@@ -9,6 +9,11 @@ const mammoth = require('mammoth');
  */
 async function extractText(buffer, mimetype) {
   try {
+    // If it's a Python file or Plain Text, just return the string
+    if (mimetype === 'text/x-python' || mimetype === 'text/plain') {
+      return buffer.toString('utf-8');
+    }
+
     if (mimetype === 'application/pdf') {
       const data = await pdfParse(buffer);
       return data.text;
