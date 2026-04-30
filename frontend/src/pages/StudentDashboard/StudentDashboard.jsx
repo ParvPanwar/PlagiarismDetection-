@@ -37,6 +37,7 @@ function StudentDashboard() {
       const formatted = res.data.map(sub => ({
         id: sub.submission_id,
         title: sub.file_name,
+        subtitle: sub.assignment_title,
         date: sub.submitted_at,
         status: sub.status,
         similarity: sub.highest_similarity,

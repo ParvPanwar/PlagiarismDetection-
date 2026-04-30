@@ -41,6 +41,11 @@ const Sidebar = ({
               onClick={() => onItemClick(item)}
             >
               <div className={styles.navItemTitle}>{item.title}</div>
+              {item.subtitle && (
+                <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.5rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {item.subtitle}
+                </div>
+              )}
               
               {role === 'Student' && (
                 <div className={styles.navItemMeta}>
