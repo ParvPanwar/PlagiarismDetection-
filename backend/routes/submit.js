@@ -51,6 +51,9 @@ router.post('/', upload.single('file'), async (req, res) => {
       const [idResult] = await connection.query('SELECT @id AS id');
       const submissionId = idResult[0].id;
 
+      // Update the file name because the stored procedure hardcodes it
+      await connection.query('UPDATE Submission SET file_name = ?, file_type = ? WHERE submission_id = ?', [file.originalname, file.mimetype, submissionId]);
+
       // Call sp_run_plagiarism using the generated @id and a threshold of 40.00
       await connection.query('CALL sp_run_plagiarism(@id, 40.00)');
       

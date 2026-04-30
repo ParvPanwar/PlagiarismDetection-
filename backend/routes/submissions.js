@@ -11,6 +11,7 @@ router.get('/:student_id', async (req, res) => {
       SELECT 
           s.submission_id, 
           s.assignment_id, 
+          s.file_name,
           a.title AS assignment_title, 
           s.submitted_at,
           COALESCE(MAX(pr.similarity_pct), 0) AS highest_similarity,
@@ -23,7 +24,7 @@ router.get('/:student_id', async (req, res) => {
       LEFT JOIN Plagiarism_Report pr 
           ON pr.submission1_id = s.submission_id OR pr.submission2_id = s.submission_id
       WHERE s.student_id = ?
-      GROUP BY s.submission_id, s.assignment_id, a.title, s.submitted_at
+      GROUP BY s.submission_id, s.assignment_id, s.file_name, a.title, s.submitted_at
       ORDER BY s.submitted_at DESC
     `;
 

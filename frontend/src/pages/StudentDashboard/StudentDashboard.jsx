@@ -33,7 +33,7 @@ function StudentDashboard() {
       // Format data for sidebar
       const formatted = res.data.map(sub => ({
         id: sub.submission_id,
-        title: sub.assignment_title,
+        title: sub.file_name,
         date: sub.submitted_at,
         status: sub.status,
         similarity: sub.highest_similarity,
