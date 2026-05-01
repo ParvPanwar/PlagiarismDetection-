@@ -1,5 +1,7 @@
 # PlagioCheck - SQL-Based Plagiarism Detection System
 
+**Live Website:** [https://parvpanwar.github.io/PlagiarismDetection-](https://parvpanwar.github.io/PlagiarismDetection-)
+
 PlagioCheck is a full-stack web application designed for educational institutions to automate the process of detecting plagiarism in student assignments. Unlike typical plagiarism checkers that rely on heavy external APIs or machine learning models, PlagioCheck implements the core text tokenization and comparison logic **natively in the database layer** using SQL stored procedures.
 
 ## 🚀 Features
